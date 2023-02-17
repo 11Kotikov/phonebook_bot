@@ -23,7 +23,7 @@ calc_keyboard.add(InlineKeyboardButton('New phone book (the old one will be dele
                   InlineKeyboardButton('Quit from the phone book', callback_data='9'))
 
 @bot.message_handler(commands=['start'])
-def calc_command(message: types.Message):
+def greatings(message: types.Message):
     bot.send_message(message.chat.id, 'This phone number book, hello dear "user_name"', reply_markup=calc_keyboard)
 
 @bot.callback_query_handler(lambda callback: callback.data)
@@ -43,8 +43,9 @@ def control_system (callback: types.CallbackQuery):
                     lines = pb.readline()
                     if not lines:
                         break
-                    bot.edit_message_text(f'{lines.strip()}', callback.message.chat.id, callback.message.id,
-                              reply_markup=calc_keyboard)
+                    bot.send_message(callback.message.chat.id, lines.strip())
+                    # bot.edit_message_text(f'{lines.strip()}', callback.message.chat.id, callback.message.id,
+                              #reply_markup=calc_keyboard)
     # elif callback.data == '1':
     # elif callback.data == '1':
     # elif callback.data == '1':
